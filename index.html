@@ -242,7 +242,195 @@ Content" title="Zealot" type="application/atom+xml">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>第一次</p>
+        <p>第一次的工程实践项目：TC图形库下的贪吃蛇小程序（需要安装easyX）<br>从<a href="http://www.easyx.cn/下载后安装" target="_blank" rel="noopener">http://www.easyx.cn/下载后安装</a></p>
+<p>源代码如下：</p>
+<p>#include&lt;stdio.h&gt;</p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>#include &lt;conio.h&gt;</p>
+<p>#include &lt;stdlib.h&gt;</p>
+<p>#include &lt;time.h&gt;<br>/<strong><strong><strong>*</strong></strong></strong>初始化操作<strong><strong><strong>*</strong></strong></strong>/<br>//宏定义上下左右键值 </p>
+<p>#define up 72</p>
+<p>#define down 80</p>
+<p>#define left 75</p>
+<p>#define right 77</p>
+<p>//每一个结点代表一节蛇身，采用双向链表方便定位结点<br>typedef struct Snake<br>{<br>    int x;<br>    int y;<br>    struct Snake <em>next,</em>prior;</p>
+<p>}snake;</p>
+<p>//flag代表食物是否被吃 1表示吃了 0表示没吃<br>struct Food<br>{<br>    int x;<br>    int y;<br>    int flag;<br>}food;</p>
+<p>//先定义开始的四节蛇<br>snake <em>head,</em>tail,<em>p,</em>q;<br>snake <em>s,</em>_new; </p>
+<p>int direct=right;    //初始化方向向左<br>int length=4;<br>int i;<br>int score=-10;    //初始化分数<br>int speed=0;    //游戏速度 </p>
+<p>/<strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong>/</p>
+<p>void Chooselevel();        //选择难度<br>void Initsnake();         //初始化蛇<br>void Drawsnake();        //画蛇<br>void Movesnake();        //移动蛇的坐标<br>void Controlsnake();    //键盘控制蛇的移动<br>void Creatfood();        //随机出现食物<br>void Drawfood();        //画食物<br>void Eatingfood();        //蛇吃到食物<br>void Endgame();            //游戏结束 </p>
+<p>int main()<br>{<br>    Chooselevel();<br>    Initsnake();<br>        while(1)<br>        {<br>            while(!kbhit())<br>            {</p>
+<pre><code>            if(food.flag==0)
+            {
+                Creatfood();
+                score+=10;
+            }
+            cleardevice();
+            loadimage(NULL, _T(&quot;背景.jpg&quot;));
+            Movesnake();
+            Drawsnake();
+            Drawfood();
+            Eatingfood();
+            Sleep(speed);
+        }
+        Controlsnake();
+    }
+return 0;
+</code></pre><p>}</p>
+<p>void Initsnake()<br>{<br>    //初始化一个640*480的窗口<br>    initgraph(640,480);</p>
+<pre><code>//给初始的四节蛇分配空间 
+head = (snake *)malloc(sizeof(snake));
+tail = (snake *)malloc(sizeof(snake));
+p = (snake*)malloc(sizeof(snake));
+q = (snake*)malloc(sizeof(snake));
+
+//初始化坐标 
+head-&gt;x=60;
+head-&gt;y=30;
+p-&gt;x = 50;
+p-&gt;y = 30;
+q-&gt;x = 40;
+q-&gt;y = 30;
+tail-&gt;x=30;
+tail-&gt;y=30;
+
+//创建链表 
+head-&gt;next = p;
+p-&gt;next = q;
+q-&gt;next = tail;
+tail-&gt;next = NULL;
+tail-&gt;prior=q;
+q-&gt;prior=p;
+p-&gt;prior=head;
+head-&gt;prior=NULL;
+</code></pre><p>}</p>
+<p>void Drawsnake()<br>{<br>    //设置蛇的颜色<br>    setlinecolor(RED);<br>    setfillcolor(YELLOW);</p>
+<pre><code>//遍历蛇身进行绘图 
+s=head;
+for(i=0;i&lt;length;i++)
+{
+    fillrectangle(s-&gt;x,s-&gt;y,s-&gt;x+10,s-&gt;y+10);
+    s=s-&gt;next; 
+}
+</code></pre><p>}</p>
+<p>void Movesnake()<br>{<br>    //将蛇的坐标向下一步进行覆盖<br>    s=head;<br>    while(1)<br>    {<br>        if(s-&gt;next==NULL) break;<br>        else<br>            s=s-&gt;next;<br>    }<br>    for(i=0;i&lt;length-1;i++)<br>    {</p>
+<pre><code>    s-&gt;x=s-&gt;prior-&gt;x;
+    s-&gt;y=s-&gt;prior-&gt;y;
+    s=s-&gt;prior;
+}
+
+//移动蛇头 
+switch(direct)
+{
+case up:
+    head-&gt;y -= 10;
+    break;
+case down:
+    head-&gt;y += 10;
+    break;
+case left:
+    head-&gt;x -= 10;
+    break;
+case right:
+    head-&gt;x += 10;
+    break;
+}
+</code></pre><p>}</p>
+<p>void Controlsnake()<br>{<br>    int move;<br>    move=getch();</p>
+<pre><code>//获取键盘输入判断移动方向 
+switch(move)
+{
+case up:
+    if(direct!=down)
+    direct=up;
+    break;
+case down:
+    if(direct!=up)
+    direct=down;
+    break;
+case left:
+    if(direct!=right)
+    direct=left;
+    break;
+case right:
+    if(direct!=left)
+    direct=right;
+    break;
+}
+</code></pre><p>}</p>
+<p>void Creatfood()<br>{<br>    //随机生成食物坐标<br>    srand((unsigned int)time(NULL));<br>    food.x=rand()%64<em>10;<br>    food.y=rand()%48</em>10;</p>
+<pre><code>//遍历蛇身 排除食物出现在蛇身 
+s=head;
+for(i=0;i&lt;length;i++)
+{
+    if(s-&gt;x==food.x&amp;&amp;s-&gt;y==food.y)
+    {
+        food.flag=0;
+    }
+    else
+    {
+        food.flag = 1;
+    }
+    s=s-&gt;next;
+}
+</code></pre><p>}</p>
+<p>void Drawfood()<br>{<br>    //设置食物颜色<br>    setlinecolor(LIGHTRED);<br>    setfillcolor(LIGHTRED);<br>    fillroundrect(food.x,food.y,food.x+10,food.y+10,15,15);<br>}</p>
+<p>void Eatingfood()<br>{<br>    //判断食物和蛇头是否重合<br>    if(head-&gt;x==food.x&amp;&amp;head-&gt;y==food.y)<br>    {<br>        s=head;<br>        while (1)<br>        {<br>            if(s-&gt;next==NULL) break;<br>            s=s-&gt;next;<br>        }<br>        _new=(snake*)malloc(sizeof(snake));<br>        _new-&gt;next=s-&gt;next;<br>        s-&gt;next=_new;<br>        _new-&gt;prior=s;<br>        length++;<br>        food.flag=0;<br>    }</p>
+<pre><code>//蛇如果吃到自己则退出 
+s=tail;
+for(i=3;i&lt;length;i++)
+{
+    if((head-&gt;x == s-&gt;x&amp;&amp;head-&gt;y == s-&gt;y+10&amp;&amp;direct == down)||(head-&gt;x == s-&gt;x&amp;&amp;head-&gt;y == s-&gt;y-10&amp;&amp;direct == up)
+        ||(head-&gt;x == s-&gt;x-10&amp;&amp;head-&gt;y == s-&gt;y&amp;&amp;direct == left)||(head-&gt;x == s-&gt;x+10&amp;&amp;head-&gt;y == s-&gt;y&amp;&amp;direct == right))
+    {
+        while(1)
+        {
+            Endgame();
+        }
+    }
+    s-&gt;next;
+}
+
+//蛇如果撞到墙则退出游戏 
+if(head-&gt;x==-10||head-&gt;x==640||head-&gt;y==-10||head-&gt;y==480)
+{
+    while(1)
+    {
+        Endgame();
+    }
+}
+</code></pre><p>}</p>
+<p>void Endgame()<br>{<br>    //设置文字格式<br>    char temp[20];<br>    itoa(score,temp,10);<br>    settextcolor(RED);<br>    settextstyle(50,25,”楷体”);</p>
+<pre><code>//结束界面 
+cleardevice();
+outtextxy(210,80,&quot;游戏结束&quot;);
+outtextxy(150,210,&quot;你的分数是：&quot;);
+outtextxy(450,210,temp);
+Sleep(10000);
+</code></pre><p>}</p>
+<p>void Chooselevel()<br>{</p>
+<pre><code>char str[20];
+printf(&quot;请输入难度（easy,normal,hard）：&quot;);
+scanf(&quot;%s&quot;,str);
+if(strcmp(str,&quot;easy&quot;)==0)
+{
+    speed=300;
+}
+else if(strcmp(str,&quot;normal&quot;)==0)
+{
+    speed=100;
+}
+else if(strcmp(str,&quot;hard&quot;)==0)
+{
+    speed=50;
+}
+else
+{
+    printf(&quot;输入错误！&quot;);
+    exit(0);
+}
+</code></pre><p>}</p>
 
       
     </div>
