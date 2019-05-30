@@ -532,15 +532,14 @@ for(i=0;i&lt;length;i++)
 s=tail;
 for(i=3;i&lt;length;i++)
 {
-    if((head-&gt;x == s-&gt;x&amp;&amp;head-&gt;y == s-&gt;y+10&amp;&amp;direct == down)||(head-&gt;x == s-&gt;x&amp;&amp;head-&gt;y == s-&gt;y-10&amp;&amp;direct == up)
-        ||(head-&gt;x == s-&gt;x-10&amp;&amp;head-&gt;y == s-&gt;y&amp;&amp;direct == left)||(head-&gt;x == s-&gt;x+10&amp;&amp;head-&gt;y == s-&gt;y&amp;&amp;direct == right))
+    if(head-&gt;x == s-&gt;x&amp;&amp;head-&gt;y == s-&gt;y)
     {
         while(1)
         {
             Endgame();
         }
     }
-    s-&gt;next;
+    s=s-&gt;next;
 }
 
 //蛇如果撞到墙则退出游戏 
