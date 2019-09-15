@@ -9,18 +9,18 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限">
+  <meta name="description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限 2.命令名称：chown  执行权限：所有用户  语法：chown [用户] [文件或目录]  功能：改变文件或目录的所有者">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令-2">
 <meta property="og:url" content="http://yoursite.com/2019/09/14/Linux常用命令-1/index.html">
 <meta property="og:site_name" content="Zealot">
-<meta property="og:description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限">
+<meta property="og:description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限 2.命令名称：chown  执行权限：所有用户  语法：chown [用户] [文件或目录]  功能：改变文件或目录的所有者">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-14T14:24:58.067Z">
+<meta property="og:updated_time" content="2019-09-15T14:16:33.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令-2">
-<meta name="twitter:description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限">
+<meta name="twitter:description" content="权限管理命令： 1.命令名称：chmod  执行权限：所有用户  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]              [mode=421] [文件或目录]              -R 递归修改  功能：改变文件或目录权限 2.命令名称：chown  执行权限：所有用户  语法：chown [用户] [文件或目录]  功能：改变文件或目录的所有者">
   
     <link rel="alternative" href="/atom.xml
 Content" title="Zealot" type="application/atom+xml">
@@ -264,6 +264,10 @@ Content" title="Zealot" type="application/atom+xml">
       
         <p>权限管理命令：</p>
 <p>1.命令名称：chmod<br>  执行权限：所有用户<br>  语法：chmod [{ugoa} {+-=} {rwx}] [文件或目录]<br>              [mode=421] [文件或目录]<br>              -R 递归修改<br>  功能：改变文件或目录权限</p>
+<p>2.命令名称：chown<br>  执行权限：所有用户<br>  语法：chown [用户] [文件或目录]<br>  功能：改变文件或目录的所有者</p>
+<p>3.命令名称：chgrp<br>  执行权限：所有用户<br>  语法：chgrp [用户组] [文件或目录]<br>  功能：改变文件或目录的所属组</p>
+<p>4.命令名称：umask<br>  执行权限：所有用户<br>  语法：umash [-S]<br>               -S 以rwx形式显示新建文件缺省权限<br>  功能：显示、设置文件的缺省权限</p>
+<p>  注：umask [077] 这种还可以更改创建目录时的权限</p>
 
       
     </div>
