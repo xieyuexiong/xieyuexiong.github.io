@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Zealot">
 <meta property="og:description" content="文件搜索命令： 1.命令名称： find  执行权限：所有用户  语法： find [搜索范围] [匹配条件]  功能描述： 文件搜索  例： $find /etc -name init  (init)模糊搜索 (init)以init开头        在目录/etc中查找文件init 匹配任意    ？匹配单个                   -iname 不区分大小写 $find / -s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-16T15:52:49.976Z">
+<meta property="og:updated_time" content="2019-09-17T15:19:10.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令-3">
 <meta name="twitter:description" content="文件搜索命令： 1.命令名称： find  执行权限：所有用户  语法： find [搜索范围] [匹配条件]  功能描述： 文件搜索  例： $find /etc -name init  (init)模糊搜索 (init)以init开头        在目录/etc中查找文件init 匹配任意    ？匹配单个                   -iname 不区分大小写 $find / -s">
@@ -282,6 +282,12 @@ $find / -size +201800 -a -type -f -exec ls -l {} \;
 在根目录下查找大于100MB的文件
 -a and   -o or
 -type fdl   f 文件    d 目录    l 软链接文件
+</code></pre><p>2.命令名称：locate<br>  执行权限：所有用户<br>  语法：locate 文件名<br>        -i 不区分大小写<br>  功能描述：在文件资料库里查找文件</p>
+<p>  updatedb 更新文件资料库</p>
+<p>3.命令名称：which<br>  执行权限：所有用户<br>  语法：which 命令<br>  功能描述：搜索命令所在目录及别名信息<br>  which ls</p>
+<p>4.命令名称：whereis<br>  执行权限：所有用户<br>  语法：whereis 命令名称<br>  功能描述：搜索命令所在目录及帮助文档路径<br>  whereis ls</p>
+<p>5.命令名称：grep<br>  执行权限：所有用户<br>  语法：grep -iv [指定字串] [文件]<br>  功能描述：在文件中搜寻字串匹配的行并输出<br>        -i    不区分大小写<br>        -v    排除指定字串<br>范例：# grep mysql /root/install.log</p>
+<pre><code># grep -v ^# /etc/inittab  不显示以#开头的行
 </code></pre>
       
     </div>
